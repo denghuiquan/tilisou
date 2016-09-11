@@ -1,0 +1,52 @@
+ body{
+    margin: 0;padding: 0;
+    background-color:burlywood ;
+    background-size: 150%;
+    min-width: 480px;
+}
+#main{
+    position:relative;
+    top: 60px;
+    margin-bottom: 60px;;
+}
+
+#side_left{
+    height: auto;
+}
+
+#side_menu{
+	width: 23%;
+	top:165px;
+    border-top: 2px solid green;
+    border-right: 3px solid greenyellow;
+    border-radius:0 15px 15px 0;
+    background: url("../images/pic05.jpg") no-repeat top center;
+    background-size: cover;
+    padding: 28px 10px;	
+}
+
+
+#timu_display_area ul#timu_list>li{
+    padding: 3px 5px 2px 5px;
+    border-top: 4px dashed darkslategray;
+    margin-bottom: 8px;
+}
+
+#backTotop{
+    display:none;
+    position: fixed;
+    top: 85%;
+    left: 98%;
+    z-index: 20;
+    opacity: 0.6;
+    -webkit-transition: all 0.5s;;
+    transition: all 0.5s;
+}
+#backTotop{
+    _position:absolute;
+    _top:expression(documentElement.scrollTop + documentElement.clientHeight * 3/4 + "px");
+}
+#backTotop:hover{
+    opacity: 0.9;
+    left: 95%;
+}

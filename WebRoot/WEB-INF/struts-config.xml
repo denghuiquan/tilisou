@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="adminForm" type="com.tilisou.viewmodel.AdminForm"/>
+		<form-bean name="timuForm" type="com.tilisou.viewmodel.TimuForm"/>
+		<form-bean name="timuQueryForm" type="com.tilisou.viewmodel.TimuQueryForm"/>		
+	</form-beans>
+	
+	<global-forwards>
+		<forward name="message" path="/WEB-INF/pages/share/message.jsp" />
+	</global-forwards>
+	
+	<action-mappings>
+		<!--=========== 后台管理控制台页面  ============-->	
+		<action path="/control/center/main" forward="/WEB-INF/pages/control/default.jsp"></action>
+			 			
+		<!-- 题目分页显示 -->
+		<action path="/control/timu/list" name="timuForm" scope="request">
+			<forward name="list" path="/WEB-INF/pages/timu/timulist.jsp"/>
+		</action>
+			
+		<!-- 题目管理 -->
+		<action path="/control/timu/manage" name="timuForm" scope="request" parameter="method">
+			<forward name="edit" path="/WEB-INF/pages/timu/timuedit.jsp"/>
+			<forward name="add" path="/WEB-INF/pages/timu/import_timu.jsp"/>
+		</action>
+		
+		<!-- 管理员登录后台 -->
+		<action path="/admin/logon" name="adminForm" scope="request" validate="false">
+			<forward name="main" path="/control/center/main.do" redirect="true"/>
+			<forward name="logon" path="/WEB-INF/pages/control/logon.jsp"/>
+		</action>
+		
+		<!-- 管理密码修改  -->					
+		<action path="/control/admin/manage" name="adminForm" scope="request" parameter="method">
+			<forward name="editpassword" path="/WEB-INF/pages/control/modify_psw.jsp"/>
+		</action>
+		
+		<!-- 管理员退出登录 -->
+		<action path="/admin/logout" name="adminForm" scope="request" validate="false">
+			<forward name="logon" path="/admin/logon.do" redirect="true"/>
+		</action>			
+		
+		<!-- ###############################  前台显示   ################################### -->
+		<!-- 题目列表显示 -->
+		<action path="/timu/list/display" name="timuForm" scope="request">
+			<forward name="list" path="/WEB-INF/pages/timu/frontpage/timulist.jsp"/>
+		</action>
+				
+		<!-- 测栏推荐和浏览历史管理 -->
+		<action path="/timu/switch" name="timuForm" scope="request" parameter="method">
+			<forward name="viewHistory" path="/WEB-INF/pages/timu/frontpage/viewHistory.jsp"/>
+		</action>
+		
+		<!-- 题目搜索 -->
+		<action path="/timu/query" name="timuQueryForm" scope="request">
+			<forward name="list" path="/WEB-INF/pages/timu/frontpage/querytimulist.jsp"/>
+		</action>	
+		
+	</action-mappings>
+	
+	<!-- 配置Struts请求进程管理器 -->
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+</struts-config>
